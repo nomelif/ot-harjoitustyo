@@ -1,3 +1,5 @@
+Noni oikein hyvä
+
 kurssit/
 └── ot2019
     └── viikko1
