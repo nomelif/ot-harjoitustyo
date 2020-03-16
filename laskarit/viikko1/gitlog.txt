@@ -1,0 +1,113 @@
+commit 5f14fb3fb6a97ccff79a1480d6b16bed842a8207
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 13:27:40 2020 +0200
+
+    Olipa pyörittely
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit de0e91b34e1ca06c8d83d26045a0379827c5cc3a
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 13:25:07 2020 +0200
+
+    filuja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 0ed72aa4a673c0bb0acb246a316921d7d225d507
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 13:21:41 2020 +0200
+
+    Hunkety hunk
+
+ eka.txt    | 11 +++++++++--
+ kolmas.txt |  2 +-
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+
+commit 704127916ce9994eaf257f9bf86c796ceed281f7
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 13:20:07 2020 +0200
+
+    Nätimpi ois kai git mv ollu
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 605311615e3fcd547ad47c8a2d47a059b0dab0c3
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 13:19:10 2020 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit b1b4706343897879c440d7370eeadd68302d9410
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 13:16:36 2020 +0200
+
+    Hoitotilanne
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1c41c633cc7c8db22350018588e1174fe1a152c5
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 13:15:45 2020 +0200
+
+    Koronapelottelu
+
+ tiedosto.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit f98cdbaf20fd07569cc047ce854618b7e7707fd1
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 12:20:36 2020 +0200
+
+    Vähän valkoista kohinaa
+
+ "stuff/bin\303\244\303\244riskeidaa" | Bin 0 -> 1024 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit fa41aba36619dee84b32e9dbda391eedd97913c9
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 12:18:44 2020 +0200
+
+    Päivitys
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit a51259caf85fbc31c755c4cb9e75061c89455452
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 12:17:06 2020 +0200
+
+    Lisätty kolmas tiedosto
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 8817e32785289d04b0b22436884e19112be59726
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 12:12:37 2020 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 6fb38c3dd456729f1e7be73cf617db15368ca228
+Author: Théo Friberg <fsmnarmosta@posteo.net>
+Date:   Mon Mar 16 12:00:57 2020 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
