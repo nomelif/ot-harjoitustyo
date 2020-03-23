@@ -8,4 +8,4 @@ Sovellus pyrkii olemaan karttageneraattori roolipelikampanjoita varten. Se tuott
 
 # Vaatimusmäärittely
 
-[Vaatimusmäärittely](vaatimusmäärittely.md)
+[Vaatimusmäärittely](harjoitustyö/dokumentaatio/vaatimusmäärittely.md)
