@@ -9,4 +9,4 @@ Ajatus on kovin laajennetta sekä käyttöliittymällisesti että simuloitavien 
 
 # Työaikakirjanpito
 
-[Työaikakirjanpito](harjoitustyö/dokumentaatio.md)
+[Työaikakirjanpito](harjoitustyö/dokumentaatio/Työaikakirjanpito.md)
