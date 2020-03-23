@@ -1,10 +1,12 @@
-* [gitlog.txt](https://github.com/nomelif/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
-* [komentorivi.txt](https://github.com/nomelif/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+# MapApp
 
-Töhösin niin että pistin nuo linkint omalta koneelta, näpytän nyt takapäin perin jotain GH:n nettikäyttöliittymänkin kautta.
+Sovellus pyrkii olemaan karttageneraattori roolipelikampanjoita varten. Se tuottaa pelikelpoisia karttoja erilaisten kohinamallien ja eroosion simuloimisen avulla. Lisäksi tavoitteena olisi ajan puitteissa toteuttaa:
 
-2
+- Yhteensopivuus Wesnoth-pelin karttamuokkaimen kanssa niin, että simuloiduista kartoista saisi Wesnothin olemassa olevaan pikseligrafiikkaan nojautuen hienon näköisiä. Lisäksi Wesnothin kuusikulmiolaatat sopisivat moneen pelijärjestelmään.
+- Erilaisten ekosysteemien ja ilmastollisten vaikutusten simuloiminen.
 
-# Koronaviirus wikipedian mukaan
+Ajatus on kovin laajennetta sekä käyttöliittymällisesti että simuloitavien ilmiöiden suhteen. Pelillisesti esimerkiksi erilaisten luonnonmullistusten simuloiminen voi olla kiinnostavaa. Voi olla myös mielekäs jatkokehitysajatus tehdä järjestelmästä yhteensopiva jonkin 3D-tulostettavan laattajärjestelmän kanssa (nopealla haulla esimerkiksi hyground-niminen firma tekee kiinnostavia tuotteita tällä alalla: https://www.hygroundtiles.com/)
 
-__Coronaviruses__ are a group of related viruses that cause diseases in mammals and birds. In humans, coronaviruses cause respiratory tract infections that are typically mild, such as some cases of the common cold (among other possible causes, predominantly rhinoviruses), though rarer forms can be lethal, such as SARS, MERS, and COVID-19. Symptoms in other species vary: in chickens, they cause an upper respiratory tract disease, while in cows and pigs they cause diarrhea. _There are yet to be vaccines or antiviral drugs to prevent or treat human coronavirus infections._
+# Työaikakirjanpito
+
+[Työaikakirjanpito](harjoitustyö/dokumentaatio.md)
