@@ -13,8 +13,8 @@
     <dependencies>
     <dependency>
         <groupId>com.flowpowered</groupId>
-            <artifactId>flow-noise</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+        <artifactId>flow-noise</artifactId>
+        <version>1.0.0</version>
+    </dependency>
     </dependencies>
 </project>
