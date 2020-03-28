@@ -2,6 +2,7 @@ package map;
 
 import com.flowpowered.noise.module.source.Perlin;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Map{
     private double[] data;
@@ -49,6 +50,36 @@ public class Map{
 
         // Regularize
 
+    }
+
+    public void doErosion(int drops, int iterations){
+        Random r = new Random();
+        for(int d = 0; d < drops; d++){
+            int x = r.nextInt(this.getWidth());
+            int y = r.nextInt(this.getHeight());
+            for(int i = 0; i < iterations; i++){
+                int bestDx = -1;
+                int bestDy = -1;
+                double bestDelta = 1;
+                for(int dx = -1; dx <= 1; dx++){
+                    for(int dy = -1; dy <= 1; dy++){
+                        if(dx == 0 && dy == 0) continue;
+                        if(x+dx < 0 || x + dx > this.getWidth()-1 || y+dy < 0 || y + dy > this.getHeight()-1) continue;
+                        double delta = (data[(y+dy)*this.getWidth() + x+dx] - data[y*this.getWidth() + x]) / Math.sqrt(dx*dx + dy*dy);
+                        if(bestDelta > delta){
+                            bestDelta = delta;
+                            bestDx = dx;
+                            bestDy = dy;
+                        }
+                    }
+                }
+                if(bestDelta > 0) break;
+                data[y*this.getWidth() + x] += bestDelta / 2;
+                y += bestDy;
+                x += bestDx;
+                data[y*this.getWidth() + x] -= bestDelta / 2;
+            }
+        }
     }
 
     public BufferedImage toBufferedImage(){
