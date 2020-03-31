@@ -128,6 +128,9 @@ public class Map{
     }
 
     public BufferedImage toBufferedImage(){
+
+        // TODO: Make this output 16 bit greyscale png. The original data is 64 bit float.
+
         BufferedImage result = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
         for(int y = 0; y < this.getHeight(); y++){
             for(int x = 0; x < this.getWidth(); x++){
