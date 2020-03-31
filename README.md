@@ -18,7 +18,7 @@ Minulla on ollut tietyt vaikeudet saada testattua ohjelman suorittuvuus yliopist
 
 Ohjelman suorituksessa sen tarjoamilla oletusasetuksilla kestää minun koneellani osapuilleen kaksi minuuttia. Ohjelma antaa väliakatiedotetta laskennan edistymisestä eli on helppo nähdä onko se kaatunut. Ulos tuleva korkeuskartta ei välttämättä ole kummoinen, mutta sen projektio 3D-tasoksi on kiintoisa. Tässä on esimerkki oletusarvoilla ja siemenarvolla `1337` syntyvä tulos:
 
-![esimerkkikuva]("dokumentaatio/1337.jpg")
+![esimerkkikuva](dokumentaatio/1337.jpg)
 
 # Testien suoritus ja Jacoco
 
