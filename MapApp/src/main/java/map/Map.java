@@ -7,10 +7,17 @@ import java.util.Random;
 public class Map{
     private double[] data;
     private int width;
+    private int seed;
+    Random r;
+    Perlin p;
 
-    public Map(int width, int height){
+    public Map(int width, int height, int seed){
         data = new double[width*height];
         this.width = width;
+        this.seed = seed;
+        this.r = new Random(seed);
+        this.p = new Perlin();
+        this.p.setSeed(seed);
     }
 
     public double index(int x, int y){
