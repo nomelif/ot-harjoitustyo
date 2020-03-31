@@ -4,8 +4,8 @@ Sovellus pyrkii olemaan karttageneraattori roolipelikampanjoita varten. Se tuott
 
 # Työaikakirjanpito
 
-[Työaikakirjanpito](harjoitustyö/dokumentaatio/Työaikakirjanpito.md)
+[Työaikakirjanpito](dokumentaatio/Työaikakirjanpito.md)
 
 # Vaatimusmäärittely
 
-[Vaatimusmäärittely](harjoitustyö/dokumentaatio/vaatimusmäärittely.md)
+[Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
