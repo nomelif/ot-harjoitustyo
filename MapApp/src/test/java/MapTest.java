@@ -47,7 +47,7 @@ public class MapTest {
     
     @Test
     public void testMapStartsBlank(){
-        Map m = new Map(512, 512, 1337);
+        Map m = new Map(256, 256, 1337);
         for(int y = 0; y < m.getHeight(); y++){
             for(int x = 0; x < m.getWidth(); x++){
                 assertTrue("Got value: "+m.index(x, y)+" for coordinates ("+x+", "+y+")" , m.index(x, y) == 0.0);
@@ -72,16 +72,16 @@ public class MapTest {
         double[] cutoffs = new double[]{0.5570824427064333, 0.1004383896492449, 0.059814371052977044, 0.4329529143305758, 0.9207673174007874, 0.23132752397556755, 0.17543163842110077, 0.29027217079867784, 0.38369656915106976, 0.6945837916026952};
 
         for(int i = 0; i < offsets.length; i++){
-            Map m = new Map(512, 512, seeds[i]);
+            Map m = new Map(256, 256, seeds[i]);
             m.makePerlin(scales[i], influences[i], offsets[i]);
             m.waterCutoff(cutoffs[i]);
-            m.doErosion(1000000, 500);
+            m.doErosion(1000, 500);
 
 
-            Map m2 = new Map(512, 512, seeds[i]);
+            Map m2 = new Map(256, 256, seeds[i]);
             m2.makePerlin(scales[i], influences[i], offsets[i]);
             m2.waterCutoff(cutoffs[i]);
-            m2.doErosion(1000000, 500);
+            m2.doErosion(1000, 500);
             for(int y = 0; y < m.getHeight(); y++){
                 for(int x = 0; x < m.getWidth(); x++){
                     assertTrue("Got value: "+m.index(x, y)+" for coordinates ("+x+", "+y+") from m and value: "+m2.index(x, y)+ " from m2 with seed: " + seeds[i] + ", scale: " + scales[i] + ", offset: " + offsets[i] + ", influence: " + influences[i] , m.index(x, y) == m2.index(x, y));
@@ -105,10 +105,10 @@ public class MapTest {
 		int[] seeds = new int[]{585, 224, 873, 17, 261, 586, 653, 924, 907, 478};
 
         for(int i = 0; i < offsets.length; i++){
-            Map m = new Map(512, 512, seeds[i]);
+            Map m = new Map(256, 256, seeds[i]);
             m.makePerlin(scales[i], influences[i], offsets[i]);
 
-            Map m2 = new Map(512, 512, seeds[i]); // Safe to do based on the test above
+            Map m2 = new Map(256, 256, seeds[i]); // Safe to do based on the test above
             m2.makePerlin(scales[i], influences[i], offsets[i]);
 
             m2.waterCutoff(cutoffs[i]);
@@ -141,7 +141,7 @@ public class MapTest {
 		int[] seeds = new int[]{585, 224, 873, 17, 261, 586, 653, 924, 907, 478};
 
         for(int i = 0; i < offsets.length; i++){
-            Map m = new Map(512, 512, seeds[i]);
+            Map m = new Map(256, 256, seeds[i]);
             m.makePerlin(scales[i], influences[i], offsets[i]);
             for(int y = 0; y < m.getHeight(); y++){
                 for(int x = 0; x < m.getWidth(); x++){
@@ -165,7 +165,7 @@ public class MapTest {
 		int[] seeds = new int[]{585, 224, 873, 17, 261, 586, 653, 924, 907, 478};
 
         for(int i = 0; i < offsets.length; i++){
-            Map m = new Map(512, 512, seeds[i]);
+            Map m = new Map(256, 256, seeds[i]);
             m.makePerlin(scales[i], influences[i], offsets[i]);
             for(int y = 0; y < m.getHeight(); y++){
                 for(int x = 0; x < m.getWidth(); x++){
