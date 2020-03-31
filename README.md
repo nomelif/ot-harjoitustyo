@@ -23,7 +23,7 @@ Suorempi lähestymistapa tuntui toimineen omalla NixOS-läppärillä:
 
 ```mvn compile exec:java -Dexec.mainClass=ui.Main```
 
-Ohjelman suorituksessa sen tarjoamilla oletusasetuksilla kestää minun koneellani osapuilleen kaksi minuuttia. Ohjelma antaa väliakatiedotetta laskennan edistymisestä eli on helppo nähdä onko se kaatunut. Ulos tuleva korkeuskartta ei välttämättä ole kummoinen, mutta sen projektio 3D-tasoksi on kiintoisa. (Tein tämän Blenderillä) Tässä on esimerkki oletusarvoilla ja siemenarvolla `1337` syntyvä tulos:
+Ohjelman suorituksessa sen tarjoamilla oletusasetuksilla kestää minun koneellani osapuilleen kaksi minuuttia. Ohjelma antaa väliakatiedotetta laskennan edistymisestä eli on helppo nähdä onko se kaatunut. Ulos tuleva korkeuskartta ei välttämättä ole kummoinen, mutta sen projektio 3D-tasoksi on kiintoisa. (Tein tämän Blenderillä) Tässä on esimerkki oletusarvoilla ja siemenarvolla `1337` syntyvän tuloksen projektio:
 
 ![esimerkkikuva](dokumentaatio/1337.jpg)
 
