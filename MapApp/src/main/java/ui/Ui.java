@@ -99,7 +99,7 @@ public class Ui extends Application {
 
         saveButton = new Button("Save map");
         saveButton.setOnAction(actionEvent -> {
-            File file = fileChooser.showOpenDialog(window);
+            File file = fileChooser.showSaveDialog(window);
                 if (file != null) {
                     try{
                         ImageIO.write(map.toBufferedImage(), "png", file);
