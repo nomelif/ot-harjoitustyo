@@ -9,15 +9,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.stage.FileChooser;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
 import java.lang.Thread;
+
+import javax.imageio.ImageIO;
+import java.io.*;
 
 import map.*;
 
@@ -32,15 +38,19 @@ public class Ui extends Application {
     private Slider erosionIterations;
 
     private Button updateButton;
+    private Button saveButton;
 
     private Label status;
 
+    private Map map;
     private MapTask task;
 
     private ImageView result;
 
     @Override
     public void start(Stage window){
+
+        FileChooser fileChooser = new FileChooser();
 
         SplitPane mainSplit = new SplitPane();
 
@@ -78,20 +88,32 @@ public class Ui extends Application {
             status.textProperty().bind(task.messageProperty());
 
             task.setOnSucceeded((succeededEvent) -> {
-                result.setImage(SwingFXUtils.toFXImage(task.getValue().toBufferedImage(), null));
+                map = task.getValue();
+                result.setImage(SwingFXUtils.toFXImage(map.toBufferedImage(), null));
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
             executorService.execute(task);
             executorService.shutdown();
+        });
 
+        saveButton = new Button("Save map");
+        saveButton.setOnAction(actionEvent -> {
+            File file = fileChooser.showOpenDialog(window);
+                if (file != null) {
+                    try{
+                        ImageIO.write(map.toBufferedImage(), "png", file);
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
         });
 
         result = new ImageView();
 
         status = new Label("");
 
-        VBox parameterPane = new VBox(new Label("Random seed"), seed, new Label("Mountain scale multiplier (smaller number = smaller mountains)"), mountainScale, new Label("Mountain cutoff"), mountainCutoff, new Label("Larger feature scale multiplier (smaller number = smaller features)"), largeFeatureScale, new Label("Sea level cutoff"), seaCutoff, new Label("Erosion iterations"), erosionIterations, updateButton);
+        VBox parameterPane = new VBox(new Label("Random seed"), seed, new Label("Mountain scale multiplier (smaller number = smaller mountains)"), mountainScale, new Label("Mountain cutoff"), mountainCutoff, new Label("Larger feature scale multiplier (smaller number = smaller features)"), largeFeatureScale, new Label("Sea level cutoff"), seaCutoff, new Label("Erosion iterations"), erosionIterations, new HBox(updateButton, saveButton));
         VBox resultPane = new VBox(result);
 
         mainSplit.getItems().addAll(parameterPane, resultPane);
