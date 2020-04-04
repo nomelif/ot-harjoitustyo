@@ -11,8 +11,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
+import javafx.embed.swing.SwingFXUtils;
 
-import map.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import java.lang.Thread;
+
+import map.*;
 
 public class Ui extends Application {
 
@@ -27,6 +34,10 @@ public class Ui extends Application {
     private Button updateButton;
 
     private Label status;
+
+    private MapTask task;
+
+    private ImageView result;
 
     @Override
     public void start(Stage window){
@@ -57,36 +68,31 @@ public class Ui extends Application {
 
         updateButton = new Button("Update map");
         updateButton.setOnAction(actionEvent -> {
-            int width = 512;
-            int seedValue = seed.getText().hashCode();
-            System.out.println(seedValue);
-            Map m = new Map(width, width, seedValue);
 
-            status.setText("Generating mountains");
-            m.makePerlin(mountainScale.getValue(), 1, 0);
-            m.waterCutoff(mountainCutoff.getValue());
-
-            status.setText("Generating large features");
-            m.makePerlin(largeFeatureScale.getValue(), 0.6, 0);
-            m.waterCutoff(seaCutoff.getValue());
-
-            status.setText("Calculating erosion");
-
-            int iterations = ((int) erosionIterations.getValue());
-
-            for(int i = 0; i < iterations; i++){
-                status.setText("Calculating erosion, iteration " + i + " / " + iterations);
-                m.doErosion(100000, 500);
+            if(task != null){
+                task.cancel();
             }
 
-            status.setText("Done");
+            task = new MapTask(512, seed.getText().hashCode(), mountainScale.getValue(), mountainCutoff.getValue(), largeFeatureScale.getValue(), seaCutoff.getValue(), ((int) erosionIterations.getValue()));
+
+            status.textProperty().bind(task.messageProperty());
+
+            task.setOnSucceeded((succeededEvent) -> {
+                result.setImage(SwingFXUtils.toFXImage(task.getValue().toBufferedImage(), null));
+            });
+
+            ExecutorService executorService = Executors.newFixedThreadPool(1);
+            executorService.execute(task);
+            executorService.shutdown();
 
         });
+
+        result = new ImageView();
 
         status = new Label("");
 
         VBox parameterPane = new VBox(new Label("Random seed"), seed, new Label("Mountain scale multiplier (smaller number = smaller mountains)"), mountainScale, new Label("Mountain cutoff"), mountainCutoff, new Label("Larger feature scale multiplier (smaller number = smaller features)"), largeFeatureScale, new Label("Sea level cutoff"), seaCutoff, new Label("Erosion iterations"), erosionIterations, updateButton);
-        VBox resultPane = new VBox();
+        VBox resultPane = new VBox(result);
 
         mainSplit.getItems().addAll(parameterPane, resultPane);
 
@@ -100,6 +106,10 @@ public class Ui extends Application {
 
         window.setTitle("MapApp");
         window.show();
+    }
+
+    public void setStatus(String text){
+        status.setText(text);
     }
 
     public static void run(){
