@@ -127,7 +127,8 @@ public class Ui extends Application {
         Scene scene = new Scene(mainBorderPane);
 
         window.setScene(scene);
-
+        window.setWidth(1000);
+        window.setHeight(567);
         window.setTitle("MapApp");
         window.show();
     }
