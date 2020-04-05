@@ -6,7 +6,7 @@ Sovelluksen tarkoitus on tuottaa karttoja (tai ainakin karttapohjia) roolipelika
 
 ## Perusversion toiminnallisuus
 
-* Ohjelmalla on graafinen käyttöliittymä
+* Ohjelmalla on graafinen käyttöliittymä [tehty]
 * Käyttäjä voi generoida kartan [tehty]
     * Oletusasetuksilla syntyy korkeuskartta meren ympäröimästä maamassasta, johon muodostuisi vuoristoja ja vesistöjä [tehty]
     * Eroosion ja vuorten poimutuksen keskinäisen suhteen pitäisi olla vaihdettavissa [tehty]
