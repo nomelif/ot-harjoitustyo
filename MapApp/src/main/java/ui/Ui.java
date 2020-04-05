@@ -100,13 +100,13 @@ public class Ui extends Application {
         saveButton = new Button("Save map");
         saveButton.setOnAction(actionEvent -> {
             File file = fileChooser.showSaveDialog(window);
-                if (file != null) {
-                    try{
-                        ImageIO.write(map.toBufferedImage(), "png", file);
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
+            if (file != null) {
+                try{
+                    ImageIO.write(map.toBufferedImage(), "png", file);
+                }catch(IOException e){
+                    e.printStackTrace();
                 }
+            }
         });
 
         result = new ImageView();
