@@ -90,6 +90,7 @@ public class Ui extends Application {
             task.setOnSucceeded((succeededEvent) -> {
                 map = task.getValue();
                 result.setImage(SwingFXUtils.toFXImage(map.toBufferedImage(), null));
+                saveButton.setDisable(false);
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -98,6 +99,7 @@ public class Ui extends Application {
         });
 
         saveButton = new Button("Save map");
+        saveButton.setDisable(true);
         saveButton.setOnAction(actionEvent -> {
             File file = fileChooser.showSaveDialog(window);
             if (file != null) {
