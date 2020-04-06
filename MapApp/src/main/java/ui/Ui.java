@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.embed.swing.SwingFXUtils;
@@ -47,12 +48,42 @@ public class Ui extends Application {
 
     private ImageView result;
 
-    @Override
-    public void start(Stage window){
+    private Stage window;
 
-        FileChooser fileChooser = new FileChooser();
+    @Override
+    public void start(Stage window) {
+
+        this.window = window;
+        constructControls();
+        hookButtons();
+        setWindowParameters();
+    }
+
+    private Pane constructLayout() {
 
         SplitPane mainSplit = new SplitPane();
+
+        VBox parameterPane = new VBox(new Label("Random seed"), seed, new Label("Mountain scale multiplier (smaller number = smaller mountains)"), mountainScale, new Label("Mountain cutoff"), mountainCutoff, new Label("Larger feature scale multiplier (smaller number = smaller features)"), largeFeatureScale, new Label("Sea level cutoff"), seaCutoff, new Label("Erosion iterations"), erosionIterations, new HBox(updateButton, saveButton));
+        VBox resultPane = new VBox(result);
+
+        mainSplit.getItems().addAll(parameterPane, resultPane);
+
+        BorderPane mainBorderPane = new BorderPane();
+        mainBorderPane.setCenter(mainSplit);
+        mainBorderPane.setBottom(status);
+
+        return mainBorderPane;
+    }
+
+    private void setWindowParameters() {
+        window.setScene(new Scene(constructLayout()));
+        window.setWidth(1000);
+        window.setHeight(567);
+        window.setTitle("MapApp");
+        window.show();
+    }
+
+    private void constructControls() {
 
         seed = new TextField();
 
@@ -77,9 +108,19 @@ public class Ui extends Application {
         erosionIterations.setShowTickLabels(true);
 
         updateButton = new Button("Update map");
+
+        saveButton = new Button("Save map");
+        saveButton.setDisable(true);
+
+        result = new ImageView();
+
+        status = new Label("");
+    }
+
+    private void hookUpdate() {
         updateButton.setOnAction(actionEvent -> {
 
-            if(task != null){
+            if (task != null) {
                 task.cancel();
             }
 
@@ -97,47 +138,34 @@ public class Ui extends Application {
             executorService.execute(task);
             executorService.shutdown();
         });
+    }
 
-        saveButton = new Button("Save map");
-        saveButton.setDisable(true);
+    private void hookSave() {
+
+        FileChooser fileChooser = new FileChooser();
+
         saveButton.setOnAction(actionEvent -> {
             File file = fileChooser.showSaveDialog(window);
             if (file != null) {
-                try{
+                try {
                     ImageIO.write(map.toBufferedImage(), "png", file);
-                }catch(IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
-
-        result = new ImageView();
-
-        status = new Label("");
-
-        VBox parameterPane = new VBox(new Label("Random seed"), seed, new Label("Mountain scale multiplier (smaller number = smaller mountains)"), mountainScale, new Label("Mountain cutoff"), mountainCutoff, new Label("Larger feature scale multiplier (smaller number = smaller features)"), largeFeatureScale, new Label("Sea level cutoff"), seaCutoff, new Label("Erosion iterations"), erosionIterations, new HBox(updateButton, saveButton));
-        VBox resultPane = new VBox(result);
-
-        mainSplit.getItems().addAll(parameterPane, resultPane);
-
-        BorderPane mainBorderPane = new BorderPane();
-        mainBorderPane.setCenter(mainSplit);
-        mainBorderPane.setBottom(status);
-
-        Scene scene = new Scene(mainBorderPane);
-
-        window.setScene(scene);
-        window.setWidth(1000);
-        window.setHeight(567);
-        window.setTitle("MapApp");
-        window.show();
     }
 
-    public void setStatus(String text){
+    private void hookButtons() {
+        hookUpdate();
+        hookSave();
+    }
+
+    public void setStatus(String text) {
         status.setText(text);
     }
 
-    public static void run(){
+    public static void run() {
         launch(Ui.class);
     }
 }
