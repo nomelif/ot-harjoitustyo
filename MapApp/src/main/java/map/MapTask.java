@@ -4,8 +4,6 @@ import javafx.concurrent.Task;
 
 public class MapTask extends Task<Map> {
 
-    private boolean alive = true;
-
     private int width;
     private int seedValue;
     private double mountainScale;
