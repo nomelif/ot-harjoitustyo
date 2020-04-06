@@ -2,6 +2,10 @@
 
 Sovellus pyrkii olemaan karttageneraattori roolipelikampanjoita varten. Se tuottaa pelikelpoisia karttoja erilaisten kohinamallien ja eroosion simuloimisen avulla.
 
+# Arkkitehtuuridiagrammi
+
+[Arkkitehtuuridokumentti](dokumentaatio/arkkitehtuuri.md)
+
 # Työaikakirjanpito
 
 [Työaikakirjanpito](dokumentaatio/Työaikakirjanpito.md)
