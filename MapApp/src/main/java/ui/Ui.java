@@ -161,10 +161,6 @@ public class Ui extends Application {
         hookSave();
     }
 
-    public void setStatus(String text) {
-        status.setText(text);
-    }
-
     public static void run() {
         launch(Ui.class);
     }
