@@ -10,7 +10,8 @@ Sovelluksen tarkoitus on tuottaa karttoja (tai ainakin karttapohjia) roolipelika
 * Käyttäjä voi generoida kartan [tehty]
     * Oletusasetuksilla syntyy korkeuskartta meren ympäröimästä maamassasta, johon muodostuisi vuoristoja ja vesistöjä [tehty]
     * Eroosion ja vuorten poimutuksen keskinäisen suhteen pitäisi olla vaihdettavissa [tehty]
-    * Simulaatiota voi askeltaa eteenpäin
+    * Simulaatiota voi askeltaa eteenpäin [tehty]
+        * Päädyin siihen, että säädettävällä eroosiomäärällä voi saada aikaan saman tuloksen käyttäjäystävällisemmin ja kooditasolla selkeämmin.
     * Satunnaislukugeneraattorin siemenarvoa voi vaihtaa [tehty]
 * Käyttäjä voi tallentaa kartan
     * Kartan pitäisi olla tallennettavissa sekä kuvatiedostona (png), että työtiedostona (joka sisältäisi kartan historian)
