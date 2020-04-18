@@ -124,7 +124,7 @@ public class Ui extends Application {
                 task.cancel();
             }
 
-            task = new MapTask(512, seed.getText().hashCode(), mountainScale.getValue(), mountainCutoff.getValue(), largeFeatureScale.getValue(), seaCutoff.getValue(), ((int) erosionIterations.getValue()));
+            task = new MapTask(512, new OptionCollection(seed.getText(), mountainScale.getValue(), mountainCutoff.getValue(), largeFeatureScale.getValue(), seaCutoff.getValue(), ((int) erosionIterations.getValue())));
 
             status.textProperty().bind(task.messageProperty());
 

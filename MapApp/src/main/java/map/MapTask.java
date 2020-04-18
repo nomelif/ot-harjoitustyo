@@ -4,45 +4,31 @@ import javafx.concurrent.Task;
 
 public class MapTask extends Task<Map> {
 
+    private OptionCollection options;
     private int width;
-    private int seedValue;
-    private double mountainScale;
-    private double mountainCutoff;
-    private double largeFeatureScale;
-    private double seaCutoff;
-    private int erosionIterations;
 
-    public MapTask(int width, int seedValue, double mountainScale, double mountainCutoff, double largeFeatureScale, double seaCutoff, int erosionIterations) {
-
+    public MapTask(int width, OptionCollection options) {
+        this.options = options;
         this.width = width;
-        this.seedValue = seedValue;
-        this.mountainScale = mountainScale;
-        this.mountainCutoff = mountainCutoff;
-        this.largeFeatureScale = largeFeatureScale;
-        this.seaCutoff = seaCutoff;
-        this.erosionIterations = erosionIterations;
-
     }
 
     @Override
     public Map call() {
-        Map m = new Map(width, width, seedValue);
+        Map m = new Map(width, width, options.seed.hashCode());
 
         if (isCancelled()) return null;
         updateMessage("Generating mountains");
-        m.makePerlin(mountainScale, 1, 0);
-        m.waterCutoff(mountainCutoff);
+        m.makePerlin(options.mountainScale, 1, 0);
+        m.waterCutoff(options.mountainCutoff);
 
         if (isCancelled()) return null;
         updateMessage("Generating large features");
-        m.makePerlin(largeFeatureScale, 0.6, 0);
-        m.waterCutoff(seaCutoff);
+        m.makePerlin(options.largeFeatureScale, 0.6, 0);
+        m.waterCutoff(options.seaCutoff);
 
-        int iterations = erosionIterations;
-
-        for (int i = 0; i < iterations; i++) {
+        for (int i = 0; i < options.erosionIterations; i++) {
             if (isCancelled()) return null;
-            updateMessage("Calculating erosion, iteration " + i + " / " + iterations);
+            updateMessage("Calculating erosion, iteration " + i + " / " + options.erosionIterations);
             m.doErosion(100000, 500);
         }
 
