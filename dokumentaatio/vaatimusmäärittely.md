@@ -13,10 +13,10 @@ Sovelluksen tarkoitus on tuottaa karttoja (tai ainakin karttapohjia) roolipelika
     * Simulaatiota voi askeltaa eteenpäin [tehty]
         * Päädyin siihen, että säädettävällä eroosiomäärällä voi saada aikaan saman tuloksen käyttäjäystävällisemmin ja kooditasolla selkeämmin.
     * Satunnaislukugeneraattorin siemenarvoa voi vaihtaa [tehty]
-* Käyttäjä voi tallentaa kartan
-    * Kartan pitäisi olla tallennettavissa sekä kuvatiedostona (png), että työtiedostona (joka sisältäisi kartan historian)
-* Käyttäjä voi ladata työtiedoston
-    * Työtiedostosta voi ladata kartan aiempia versioita
+* Käyttäjä voi tallentaa kartan [tehty]
+    * Kartan pitäisi olla tallennettavissa sekä kuvatiedostona (png), että työtiedostona (joka sisältäisi kartan historian) [tehty]
+* Käyttäjä voi ladata työtiedoston [tehty]
+    * Työtiedostosta voi ladata kartan aiempia versioita [tehty]
 
 ## Jatkokehitysideoita
 
