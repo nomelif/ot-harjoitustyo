@@ -17,6 +17,10 @@ import javafx.scene.image.ImageView;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.stage.FileChooser;
 
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 
@@ -76,10 +80,25 @@ public class Ui extends Application {
         mainSplit.getItems().addAll(parameterPane, resultPane);
 
         BorderPane mainBorderPane = new BorderPane();
+        mainBorderPane.setTop(constructMenu());
         mainBorderPane.setCenter(mainSplit);
         mainBorderPane.setBottom(status);
 
         return mainBorderPane;
+    }
+
+    private MenuBar constructMenu(){
+        Menu editMenu = new Menu("Edit");
+        
+        MenuItem undoItem = new MenuItem("Undo");
+        MenuItem redoItem = new MenuItem("Redo");
+        
+        editMenu.getItems().add(undoItem);
+        editMenu.getItems().add(redoItem);
+
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(editMenu);
+        return menuBar;
     }
 
     private OptionCollection readState(){
