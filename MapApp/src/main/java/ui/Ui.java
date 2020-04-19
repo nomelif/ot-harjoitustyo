@@ -91,7 +91,13 @@ public class Ui extends Application {
         Menu editMenu = new Menu("Edit");
         
         MenuItem undoItem = new MenuItem("Undo");
+        undoItem.setOnAction(e -> {
+            undo();
+        });
         MenuItem redoItem = new MenuItem("Redo");
+        redoItem.setOnAction(e -> {
+            redo();
+        });
         
         editMenu.getItems().add(undoItem);
         editMenu.getItems().add(redoItem);
@@ -107,6 +113,34 @@ public class Ui extends Application {
 
     private void updateFile(){
         this.file.update(readState());
+    }
+
+    private void apply(OptionCollection state){
+        seed.setText(state.seed);
+        mountainScale.setValue(state.mountainScale);
+        mountainCutoff.setValue(state.mountainCutoff);
+        largeFeatureScale.setValue(state.largeFeatureScale);
+        seaCutoff.setValue(state.seaCutoff);
+        erosionIterations.setValue(state.erosionIterations);
+    }
+
+    private void undo(){
+        // Check if there is new text and commit that
+        if(!seed.getText().equals(file.state().seed))
+            updateFile();
+        file.undo();
+        apply(file.state());
+
+    }
+
+    private void redo(){
+        // Check if there is new text and commit that
+        if(!seed.getText().equals(file.state().seed)){
+            updateFile();
+            return; // We are at the newest change then
+        }
+        file.redo();
+        apply(file.state());
     }
 
     private void setWindowParameters() {
