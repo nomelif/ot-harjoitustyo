@@ -24,6 +24,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 
+
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCode;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -94,10 +99,12 @@ public class Ui extends Application {
         undoItem.setOnAction(e -> {
             undo();
         });
+        undoItem.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN));
         MenuItem redoItem = new MenuItem("Redo");
         redoItem.setOnAction(e -> {
             redo();
         });
+        redoItem.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN));
         
         editMenu.getItems().add(undoItem);
         editMenu.getItems().add(redoItem);
