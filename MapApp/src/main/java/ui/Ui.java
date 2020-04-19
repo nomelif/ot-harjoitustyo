@@ -73,7 +73,7 @@ public class Ui extends Application {
         this.file = new MapAppFile(readState());
         setWindowParameters();
         hookUpdate();
-        hookSave();
+        hookExport();
     }
 
     private Pane constructLayout() {
@@ -245,7 +245,7 @@ public class Ui extends Application {
         });
     }
 
-    private void hookSave() {
+    private void hookExport() {
 
         FileChooser fileChooser = new FileChooser();
 
