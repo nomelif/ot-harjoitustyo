@@ -2,12 +2,12 @@ package map;
 
 public class OptionCollection {
 
-    final String seed;
-    final double mountainScale;
-    final double mountainCutoff;
-    final double largeFeatureScale;
-    final double seaCutoff;
-    final int erosionIterations;
+    public final String seed;
+    public final double mountainScale;
+    public final double mountainCutoff;
+    public final double largeFeatureScale;
+    public final double seaCutoff;
+    public final int erosionIterations;
 
     public OptionCollection(String seed, double mountainScale, double mountainCutoff, double largeFeatureScale, double seaCutoff, int erosionIterations) {
         this.seed = seed;
