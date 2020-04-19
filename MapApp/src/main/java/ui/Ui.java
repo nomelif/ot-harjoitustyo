@@ -2,6 +2,7 @@ package ui;
 
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.util.stream.Collectors;
 
 import javafx.application.Application;
 
@@ -59,6 +60,7 @@ public class Ui extends Application {
     private Button updateButton;
     private MenuItem exportItem;
     private MenuItem saveItem;
+    private MenuItem openItem;
 
     private Label status;
 
@@ -81,6 +83,7 @@ public class Ui extends Application {
         hookUpdate();
         hookExport();
         hookSave();
+        hookOpen();
     }
 
     private Pane constructLayout() {
@@ -130,8 +133,12 @@ public class Ui extends Application {
         saveItem = new MenuItem("Save map (.MAP)");
         saveItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
 
-        fileMenu.getItems().add(exportItem);
+        openItem = new MenuItem("Open map (.MAP)");
+        openItem.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
+
+        fileMenu.getItems().add(openItem);
         fileMenu.getItems().add(saveItem);
+        fileMenu.getItems().add(exportItem);
         
         return fileMenu;
 
@@ -267,6 +274,25 @@ public class Ui extends Application {
                 Gson g = new Gson();
                 try {
                     Files.writeString(fileName.toPath(), g.toJson(file));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    private void hookOpen() {
+
+        FileChooser fileChooser = new FileChooser();
+
+        openItem.setOnAction(actionEvent -> {
+            File fileName = fileChooser.showOpenDialog(window);
+            if (fileName != null) {
+                Gson g = new Gson();
+                try {
+                    file = g.fromJson(Files.lines(fileName.toPath()).collect(Collectors.joining("\n")), MapAppFile.class);
+                    apply(file.state());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
