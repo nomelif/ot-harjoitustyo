@@ -146,7 +146,7 @@ public class Ui extends Application {
     private void setWindowParameters() {
         window.setScene(new Scene(constructLayout()));
         window.setWidth(1000);
-        window.setHeight(567);
+        window.setHeight(587);
         window.setTitle("MapApp");
         window.show();
     }
