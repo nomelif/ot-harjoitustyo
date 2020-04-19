@@ -1,5 +1,8 @@
 package ui;
 
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 import javafx.application.Application;
 
 import javafx.scene.Scene;
@@ -38,6 +41,8 @@ import java.lang.Thread;
 import javax.imageio.ImageIO;
 import java.io.*;
 
+import com.google.gson.Gson;
+
 import map.*;
 import file.*;
 
@@ -53,6 +58,7 @@ public class Ui extends Application {
 
     private Button updateButton;
     private MenuItem exportItem;
+    private MenuItem saveItem;
 
     private Label status;
 
@@ -74,6 +80,7 @@ public class Ui extends Application {
         setWindowParameters();
         hookUpdate();
         hookExport();
+        hookSave();
     }
 
     private Pane constructLayout() {
@@ -120,7 +127,11 @@ public class Ui extends Application {
         exportItem.setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
         exportItem.setDisable(true);
 
+        saveItem = new MenuItem("Save map (.MAP)");
+        saveItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
+
         fileMenu.getItems().add(exportItem);
+        fileMenu.getItems().add(saveItem);
         
         return fileMenu;
 
@@ -242,6 +253,24 @@ public class Ui extends Application {
             ExecutorService executorService = Executors.newFixedThreadPool(1);
             executorService.execute(task);
             executorService.shutdown();
+        });
+    }
+
+
+    private void hookSave() {
+
+        FileChooser fileChooser = new FileChooser();
+
+        saveItem.setOnAction(actionEvent -> {
+            File fileName = fileChooser.showSaveDialog(window);
+            if (fileName != null) {
+                Gson g = new Gson();
+                try {
+                    Files.writeString(fileName.toPath(), g.toJson(file));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
     }
 
