@@ -52,7 +52,7 @@ public class Ui extends Application {
     private Slider erosionIterations;
 
     private Button updateButton;
-    private Button saveButton;
+    private MenuItem exportItem;
 
     private Label status;
 
@@ -71,15 +71,16 @@ public class Ui extends Application {
         this.window = window;
         constructControls();
         this.file = new MapAppFile(readState());
-        hookButtons();
         setWindowParameters();
+        hookUpdate();
+        hookSave();
     }
 
     private Pane constructLayout() {
 
         SplitPane mainSplit = new SplitPane();
 
-        VBox parameterPane = new VBox(new Label("Random seed"), seed, new Label("Mountain scale multiplier (smaller number = smaller mountains)"), mountainScale, new Label("Mountain cutoff"), mountainCutoff, new Label("Larger feature scale multiplier (smaller number = smaller features)"), largeFeatureScale, new Label("Sea level cutoff"), seaCutoff, new Label("Erosion iterations"), erosionIterations, new HBox(updateButton, saveButton));
+        VBox parameterPane = new VBox(new Label("Random seed"), seed, new Label("Mountain scale multiplier (smaller number = smaller mountains)"), mountainScale, new Label("Mountain cutoff"), mountainCutoff, new Label("Larger feature scale multiplier (smaller number = smaller features)"), largeFeatureScale, new Label("Sea level cutoff"), seaCutoff, new Label("Erosion iterations"), erosionIterations, updateButton);
         VBox resultPane = new VBox(result);
 
         mainSplit.getItems().addAll(parameterPane, resultPane);
@@ -92,7 +93,7 @@ public class Ui extends Application {
         return mainBorderPane;
     }
 
-    private MenuBar constructMenu(){
+    private Menu constructEditMenu(){
         Menu editMenu = new Menu("Edit");
         
         MenuItem undoItem = new MenuItem("Undo");
@@ -109,8 +110,27 @@ public class Ui extends Application {
         editMenu.getItems().add(undoItem);
         editMenu.getItems().add(redoItem);
 
+        return editMenu;
+    }
+
+    private Menu constructFileMenu(){
+        Menu fileMenu = new Menu("File");
+        
+        exportItem = new MenuItem("Export map (.PNG)");
+        exportItem.setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
+        exportItem.setDisable(true);
+
+        fileMenu.getItems().add(exportItem);
+        
+        return fileMenu;
+
+    }
+
+    private MenuBar constructMenu(){
+
         MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().add(editMenu);
+        menuBar.getMenus().add(constructFileMenu());
+        menuBar.getMenus().add(constructEditMenu());
         return menuBar;
     }
 
@@ -196,8 +216,6 @@ public class Ui extends Application {
         erosionIterations = monitoredSlider(0, 1000, 500);
 
         updateButton = new Button("Update map");
-        saveButton = new Button("Save map");
-        saveButton.setDisable(true);
 
         result = new ImageView();
 
@@ -218,7 +236,7 @@ public class Ui extends Application {
             task.setOnSucceeded((succeededEvent) -> {
                 map = task.getValue();
                 result.setImage(SwingFXUtils.toFXImage(map.toBufferedImage(), null));
-                saveButton.setDisable(false);
+                exportItem.setDisable(false);
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -231,7 +249,7 @@ public class Ui extends Application {
 
         FileChooser fileChooser = new FileChooser();
 
-        saveButton.setOnAction(actionEvent -> {
+        exportItem.setOnAction(actionEvent -> {
             File file = fileChooser.showSaveDialog(window);
             if (file != null) {
                 try {
@@ -241,11 +259,6 @@ public class Ui extends Application {
                 }
             }
         });
-    }
-
-    private void hookButtons() {
-        hookUpdate();
-        hookSave();
     }
 
     public static void run() {
