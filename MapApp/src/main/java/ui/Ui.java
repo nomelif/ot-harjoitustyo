@@ -17,6 +17,9 @@ import javafx.scene.image.ImageView;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.stage.FileChooser;
 
+import javafx.scene.input.MouseEvent;
+import javafx.event.EventHandler;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -27,6 +30,7 @@ import javax.imageio.ImageIO;
 import java.io.*;
 
 import map.*;
+import file.*;
 
 public class Ui extends Application {
 
@@ -50,11 +54,14 @@ public class Ui extends Application {
 
     private Stage window;
 
+    private MapAppFile file;
+
     @Override
     public void start(Stage window) {
 
         this.window = window;
         constructControls();
+        this.file = new MapAppFile(readState());
         hookButtons();
         setWindowParameters();
     }
@@ -75,6 +82,14 @@ public class Ui extends Application {
         return mainBorderPane;
     }
 
+    private OptionCollection readState(){
+        return new OptionCollection(seed.getText(), mountainScale.getValue(), mountainCutoff.getValue(), largeFeatureScale.getValue(), seaCutoff.getValue(), ((int) erosionIterations.getValue()));
+    }
+
+    private void updateFile(){
+        this.file.update(readState());
+    }
+
     private void setWindowParameters() {
         window.setScene(new Scene(constructLayout()));
         window.setWidth(1000);
@@ -83,32 +98,44 @@ public class Ui extends Application {
         window.show();
     }
 
+    private Slider monitoredSlider(double minimum, double maximum, double initial){
+        Slider slider = new Slider(minimum, maximum, initial);
+        slider.setShowTickMarks(true);
+        slider.setShowTickLabels(true);
+        slider.setOnMouseReleased(new EventHandler<MouseEvent>() {
+
+            private double previous = initial;
+
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(previous != slider.getValue()){
+                    previous = slider.getValue();
+                    updateFile();
+                }
+            }
+        });
+        return slider;
+    }
+
     private void constructControls() {
 
         seed = new TextField();
+        seed.focusedProperty().addListener(event -> {
+            if(!seed.isFocused()) {
 
-        mountainScale = new Slider(0, 100, 10);
-        mountainScale.setShowTickMarks(true);
-        mountainScale.setShowTickLabels(true);
+                // Undo and redo will have to check whether the seed matches the "current" state and might have to commit it to the MapAppFile object
 
-        mountainCutoff = new Slider(0, 1, 0.6);
-        mountainCutoff.setShowTickMarks(true);
-        mountainCutoff.setShowTickLabels(true);
+                updateFile();
+            }
+        });
 
-        largeFeatureScale = new Slider(0, 10, 1);
-        largeFeatureScale.setShowTickMarks(true);
-        largeFeatureScale.setShowTickLabels(true);
-
-        seaCutoff = new Slider(0, 1, 0.3);
-        seaCutoff.setShowTickMarks(true);
-        seaCutoff.setShowTickLabels(true);
-
-        erosionIterations = new Slider(0, 1000, 500);
-        erosionIterations.setShowTickMarks(true);
-        erosionIterations.setShowTickLabels(true);
+        mountainScale = monitoredSlider(0, 100, 10);
+        mountainCutoff = monitoredSlider(0, 1, 0.6);
+        largeFeatureScale = monitoredSlider(0, 10, 1);
+        seaCutoff = monitoredSlider(0, 1, 0.3);
+        erosionIterations = monitoredSlider(0, 1000, 500);
 
         updateButton = new Button("Update map");
-
         saveButton = new Button("Save map");
         saveButton.setDisable(true);
 
@@ -124,7 +151,7 @@ public class Ui extends Application {
                 task.cancel();
             }
 
-            task = new MapTask(512, new OptionCollection(seed.getText(), mountainScale.getValue(), mountainCutoff.getValue(), largeFeatureScale.getValue(), seaCutoff.getValue(), ((int) erosionIterations.getValue())));
+            task = new MapTask(512, readState());
 
             status.textProperty().bind(task.messageProperty());
 
