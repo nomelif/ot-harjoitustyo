@@ -2,6 +2,10 @@
 
 Sovellus pyrkii olemaan karttageneraattori roolipelikampanjoita varten. Se tuottaa pelikelpoisia karttoja erilaisten kohinamallien ja eroosion simuloimisen avulla.
 
+# Releaset
+
+[Viikko 5](https://github.com/nomelif/ot-harjoitustyo/releases/tag/viikko5)
+
 # Arkkitehtuuridiagrammi
 
 [Arkkitehtuuridokumentti](dokumentaatio/arkkitehtuuri.md)
