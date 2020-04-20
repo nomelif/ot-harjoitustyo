@@ -96,11 +96,15 @@ public class Map {
                 double bestDelta = 1; // Measure of local gradient
                 for (int dx = -1; dx <= 1; dx++) {
                     for (int dy = -1; dy <= 1; dy++) {
-                        if (dx == 0 && dy == 0) continue; // Discount (x, y)
+                        if (dx == 0 && dy == 0) { // Discount (x, y)
+                            continue;
+                        }
 
                         // Discount locations that are off the map
 
-                        if (x + dx < 0 || x + dx > this.getWidth() - 1 || y + dy < 0 || y + dy > this.getHeight() - 1) continue;
+                        if (x + dx < 0 || x + dx > this.getWidth() - 1 || y + dy < 0 || y + dy > this.getHeight() - 1) {
+                            continue;
+                        }
 
                         // Compute the gradient (compensate for diagonal points being further away)
 
@@ -115,7 +119,10 @@ public class Map {
                         }
                     }
                 }
-                if (bestDelta > 0) break; // If there is no way down, the drop dies
+
+                if (bestDelta > 0) { // If there is no way down, the drop dies
+                    break;
+                }
 
                 // bestDelta / 50 was found to be a good value experimentally
 
