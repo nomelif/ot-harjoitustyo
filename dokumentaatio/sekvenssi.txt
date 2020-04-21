@@ -1,0 +1,76 @@
+Tästä saa järkevän kaavion aikaan vetämällä läpi sequencediagram.org -työkalusta
+
+title Update map-nappia painetaan
+activate Ui
+Ui->Ui:readState
+activate Ui
+Ui->seed:getText
+activate seed
+seed-->Ui:String
+deactivate seed
+Ui->mountainScale:getValue
+activate mountainScale
+mountainScale-->Ui:double
+deactivate mountainScale
+Ui->mountainCutoff:getValue
+activate mountainCutoff
+mountainCutoff-->Ui:double
+deactivate mountainCutoff
+Ui->largeValueScale:getValue
+activate largeValueScale
+largeValueScale-->Ui:double
+deactivate largeValueScale
+Ui->seaCutoff:getValue
+activate seaCutoff
+seaCutoff-->Ui:getValue
+deactivate seaCutoff
+Ui->erosionIterations:(int) getValue
+activate erosionIterations
+erosionIterations-->Ui:int
+deactivate erosionIterations
+Ui-->Ui:OptionCollection
+deactivate Ui
+Ui->MapTask:new MapTask(512, readState())
+Ui->status:textProperty().bind(task.messageProperty())
+Ui->MapTask:setOnSucceeded(<lambda>)
+Ui->ExecutorService:= Executors.newFixedThreadPool(1)
+Ui->ExecutorService:execute(task)
+Ui->ExecutorService:shutdown
+deactivate Ui
+
+==Aikaa kuluu määrittelemätön määrä, toisessa säikeessä (Executorin speksi: Executes the given command at some time in the future.)==
+
+activate ExecutorService
+ExecutorService->MapTask:call
+activate MapTask
+MapTask->Map:new Map(width, width, options.seed.hashCode()
+MapTask->MapTask:isCancelled()
+MapTask-->MapTask:false
+MapTask->MapTask:updateMessage("Generating mountains")
+MapTask->Map:makePerlin(options.mountainScale, 1, 0)
+MapTask->Map:waterCutoff(options.mountainCutoff)
+MapTask->MapTask:isCancelled()
+MapTask-->MapTask:false
+MapTask->MapTask:updateMessage("Generating large features")
+MapTask->Map:makePerlin(options.largeFeatureScale, 0.6, 0)
+MapTask->Map:waterCutoff(options.seaCutoff)
+MapTask-->ExecutorService:Map
+box over MapTask: Tästä alkaa silmukka, joka toistuu\noptions.erosionIterations kertaa
+MapTask->MapTask:isCancelled()
+MapTask-->MapTask:false
+MapTask->MapTask:updateMessage("Calculating erosion, iteration <iteraatio> / <iteraatioita>")
+MapTask->Map:doErosion(100000, 500)
+box over MapTask: Tähän loppuu silmukka, joka toistuu\noptions.erosionIterations kertaa
+MapTask-->ExecutorService:Map
+deactivate MapTask
+deactivate ExecutorService
+==Aikaa kuluu jälleen määrittelemätön määrä, käyttöliittymäsäikeellä==
+activate Ui
+Ui->MapTask:getValue
+activate MapTask
+MapTask-->Ui:Map
+deactivate MapTask
+Ui->map:toBufferedImage
+map-->Ui:BufferedImage
+Ui->result:setImage(<mapin tuottama kuva>)
+Ui->exportItem:setDisable(false)
