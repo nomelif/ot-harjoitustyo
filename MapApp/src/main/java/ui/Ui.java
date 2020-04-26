@@ -59,6 +59,7 @@ public class Ui extends Application {
 
     private Button updateButton;
     private MenuItem exportItem;
+    private MenuItem exportOBJItem;
     private MenuItem saveItem;
     private MenuItem openItem;
 
@@ -82,6 +83,7 @@ public class Ui extends Application {
         setWindowParameters();
         hookUpdate();
         hookExport();
+        hookExportOBJ();
         hookSave();
         hookOpen();
     }
@@ -130,6 +132,10 @@ public class Ui extends Application {
         exportItem.setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN));
         exportItem.setDisable(true);
 
+        exportOBJItem = new MenuItem("Export map (.OBJ)");
+        exportOBJItem.setAccelerator(new KeyCodeCombination(KeyCode.E, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN));
+        exportOBJItem.setDisable(true);
+
         saveItem = new MenuItem("Save map (.MAP)");
         saveItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
 
@@ -139,6 +145,7 @@ public class Ui extends Application {
         fileMenu.getItems().add(openItem);
         fileMenu.getItems().add(saveItem);
         fileMenu.getItems().add(exportItem);
+        fileMenu.getItems().add(exportOBJItem);
         
         return fileMenu;
 
@@ -255,6 +262,7 @@ public class Ui extends Application {
                 map = task.getValue();
                 result.setImage(SwingFXUtils.toFXImage(map.toBufferedImage(), null));
                 exportItem.setDisable(false);
+                exportOBJItem.setDisable(false);
             });
 
             ExecutorService executorService = Executors.newFixedThreadPool(1);
@@ -309,6 +317,22 @@ public class Ui extends Application {
             if (file != null) {
                 try {
                     ImageIO.write(map.toBufferedImage(), "png", file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void hookExportOBJ() {
+
+        FileChooser fileChooser = new FileChooser();
+
+        exportOBJItem.setOnAction(actionEvent -> {
+            File fileName = fileChooser.showSaveDialog(window);
+            if (fileName != null) {
+                try {
+                    Files.writeString(fileName.toPath(), map.toWavefrontOBJ());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
