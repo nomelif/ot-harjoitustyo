@@ -6,29 +6,32 @@ public class MapTask extends Task<Map> {
 
     private OptionCollection options;
     private int width;
+    private boolean testingMode = false;
 
     public MapTask(int width, OptionCollection options) {
         this.options = options;
         this.width = width;
     }
 
+    public void enableTestingMode(){
+        this.testingMode = true;
+    }
+
+    public void maybeUpdateMessage(String message){
+        if(!testingMode && !isCancelled()){
+            updateMessage(message);
+        }
+    }
+
     @Override
     public Map call() {
         Map m = new Map(width, width, options.seed.hashCode());
 
-        if (isCancelled()) {
-            return null;
-        }
-
-        updateMessage("Generating mountains");
+        maybeUpdateMessage("Generating mountains");
         m.makePerlin(options.mountainScale, 1, 0);
         m.waterCutoff(options.mountainCutoff);
 
-        if (isCancelled()) {
-            return null;
-        }
-
-        updateMessage("Generating large features");
+        maybeUpdateMessage("Generating large features");
         m.makePerlin(options.largeFeatureScale, 0.6, 0);
         m.waterCutoff(options.seaCutoff);
 
@@ -38,15 +41,11 @@ public class MapTask extends Task<Map> {
                 return null;
             }
 
-            updateMessage("Calculating erosion, iteration " + i + " / " + options.erosionIterations);
+            maybeUpdateMessage("Calculating erosion, iteration " + i + " / " + options.erosionIterations);
             m.doErosion(100000, 500);
         }
 
-        if (isCancelled()) {
-            return null;
-        }
-
-        updateMessage("Done");
+        maybeUpdateMessage("Done");
         return m;
     }
 }
