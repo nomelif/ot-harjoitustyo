@@ -12,6 +12,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
@@ -283,7 +284,7 @@ public class Ui extends Application {
                 try {
                     Files.writeString(fileName.toPath(), g.toJson(file));
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Tiedoston tallentaminen epäonnistui", null).show();
                 }
             }
         });
@@ -301,8 +302,8 @@ public class Ui extends Application {
                 try {
                     file = g.fromJson(Files.lines(fileName.toPath()).collect(Collectors.joining("\n")), MapAppFile.class);
                     apply(file.state());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    new Alert(Alert.AlertType.ERROR, "Tiedoston aukaiseminen epäonnistui", null).show();
                 }
             }
         });
@@ -318,7 +319,7 @@ public class Ui extends Application {
                 try {
                     ImageIO.write(map.toBufferedImage(), "png", file);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Kuvan tallentaminen epäonnistui", null).show();
                 }
             }
         });
@@ -334,7 +335,7 @@ public class Ui extends Application {
                 try {
                     Files.writeString(fileName.toPath(), map.toWavefrontOBJ());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "3D-mallin tallentaminen epäonnistui", null).show();
                 }
             }
         });
