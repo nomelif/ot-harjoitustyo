@@ -31,9 +31,16 @@ Suorempi lähestymistapa tuntui toimineen omalla NixOS-läppärillä:
 
 ```mvn compile exec:java -Dexec.mainClass=ui.Main```
 
-Ohjelman suorituksessa sen tarjoamilla oletusasetuksilla kestää minun koneellani osapuilleen kaksi minuuttia. Ohjelma antaa väliakatiedotetta laskennan edistymisestä eli on helppo nähdä onko se kaatunut. Ulos tuleva korkeuskartta ei välttämättä ole kummoinen, mutta sen projektio 3D-tasoksi on kiintoisa. (Tein tämän Blenderillä) Tässä on esimerkki oletusarvoilla ja siemenarvolla `1337` syntyvän tuloksen projektio:
+Ohjelman suorituksessa sen tarjoamilla oletusasetuksilla kestää minun koneellani osapuilleen kaksi minuuttia. Ohjelma antaa väliakatiedotetta laskennan edistymisestä eli on helppo nähdä missä mennään.
 
-![esimerkkikuva](dokumentaatio/1337.jpg)
+# Ohjelman tuotokset
+
+[Tällä tiedostolla](dokumentaatio/demot/Viekas%20kettu.map) ohjelma tuottaa seuraavan kuvan ja .obj -tiedon:
+
+* ![esimerkkikuva](dokumentaatio/demot/Viekas%20kettu.png)
+* [obj-tiedosto](dokumentaatio/demot/Viekas%20kettu.obj), sen esikatselu [Sketchfabissa](https://sketchfab.com/3d-models/mapapp-demo-18ee7da3680a41c4a5a3bfdbac9c4516).
+
+Yleisesti .obj-tiedostoja voi tarkastella [esimerkiksi tällä nettikilkkeellä](http://masc.cs.gmu.edu/wiki/ObjViewer).
 
 # Testien suoritus ja Jacoco
 
