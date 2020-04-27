@@ -17,7 +17,7 @@ public class MapTask extends Task<Map> {
         this.testingMode = true;
     }
 
-    public void maybeUpdateMessage(String message){
+    private void maybeUpdateMessage(String message){
         if(!testingMode && !isCancelled()){
             updateMessage(message);
         }
