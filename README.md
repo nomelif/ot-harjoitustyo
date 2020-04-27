@@ -55,6 +55,12 @@ Javadoc päivittyy komennolla:
 mvn javadoc:javadoc
 ```
 
+Jostain syystä javadoc ei älyä päivittyä peilaamaan koodin muutoksia, ellei vanhaa tuotosta ensin poista:
+
+```
+rm target/site/apidocs/ -rf
+```
+
 Suoritettavan `.jar-` tiedoston saa aikaan komennolla:
 
 ```
