@@ -22,21 +22,6 @@ Sovellus pyrkii olemaan karttageneraattori roolipelikampanjoita varten. Se tuott
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
 
-# Ohjelman suoritus
-
-Yliopiston koneilla olen saanut ohjelman suorittumaan TMC-beansin vihreällä namiskalla ja käsivääntöisemmin kahdella komennolla:
-
-```
-mvn package
-java -jar target/MapApp-1.0-SNAPSHOT.jar
-```
-
-Suorempi lähestymistapa tuntui toimineen omalla NixOS-läppärillä:
-
-```mvn compile exec:java -Dexec.mainClass=ui.Main```
-
-Ohjelman suorituksessa sen tarjoamilla oletusasetuksilla kestää minun koneellani osapuilleen kaksi minuuttia. Ohjelma antaa väliakatiedotetta laskennan edistymisestä eli on helppo nähdä missä mennään.
-
 # Ohjelman tuotokset
 
 [Tällä tiedostolla](dokumentaatio/demot/Viekas%20kettu.map) ohjelma tuottaa seuraavan kuvan ja .obj -tiedon:
