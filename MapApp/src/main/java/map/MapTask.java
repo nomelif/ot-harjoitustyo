@@ -23,7 +23,7 @@ public class MapTask extends Task<Map> {
     /**
      * Enables testing mode. In testing mode, updateMessage never gets called and the call() method is safe to call from a non-JavaFX context.
      */
-    public void enableTestingMode(){
+    public void enableTestingMode() {
         this.testingMode = true;
     }
 
@@ -31,8 +31,8 @@ public class MapTask extends Task<Map> {
      * Calls updateMessage with message if the task has not been cancelled and testingMode is not enabled.
      * @param message Message to pass along to updateMessage.
      */
-    private void maybeUpdateMessage(String message){
-        if(!testingMode && !isCancelled()){
+    private void maybeUpdateMessage(String message) {
+        if (!testingMode && !isCancelled()) {
             updateMessage(message);
         }
     }
