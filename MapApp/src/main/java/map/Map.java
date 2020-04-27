@@ -11,6 +11,11 @@ public class Map {
     private Random r;
     private Perlin p;
 
+    /**
+     * @param width Width of the map in pixels. Also used as the width of the simulation grid in cells. Must be one or greater. This is not checked.
+     * @param height Height of the map in pixels. Also used as the height of the simulation grid in cells. Must be one or greater. This is not checked.
+     * @param seed seed value for pseudorandom operations on a map. Two map instances with the same width, height and seed are guaranteed to stay identical if the same sequence of operatinos.
+     */
     public Map(int width, int height, int seed) {
         data = new double[width * height];
         this.width = width;
@@ -20,18 +25,46 @@ public class Map {
         this.p.setSeed(seed);
     }
 
+    /**
+     * Read the raw double from a simulation cell
+     *
+     * @param x horizontal coordinate of cell to be read
+     *
+     * This must be between [0, width[. It's the responsibility of the caller to make sure this is the case.
+     *
+     * @param y horizontal coordinate of cell to be read
+     *
+     * This must be between [0, height[. It's the responsibility of the caller to make sure this is the case.
+     *
+     * @return The value of the cell at (x, y)
+     */
     public double index(int x, int y) {
         return this.data[y * this.getWidth() + x];
     }
 
+    /**
+     * @return The width of the map in pixels. This is also the width of the simulation in cells.
+     */
     public int getWidth() {
         return this.width;
     }
 
+    /**
+     * @return The height of the map in pixels. This is also the height of the simulation in cells.
+     */
     public int getHeight() {
         return this.data.length / this.width;
     }
 
+    /**
+     * Add a layer of perlin noise to the map.
+     *
+     * @param scale Scale multiplier to the sampling coordinates of the perlin noise. Higher values result in denser noise.
+     * @param influence Influence multiplier
+     * @param offset Offset multiplier.
+     * 
+     * The new values of the map are guaranteed to be in the range [old value + offset, old value + influence + offset]. influence + offset + max(old values of map) should not exceed one. influence + offset + min(old values of map) should not be less than zero. Neither of these are checked.
+     */
     public void makePerlin(double scale, double influence, double offset) {
 
         // The new perlin will be generated into a new array and then regularized
@@ -61,9 +94,15 @@ public class Map {
 
     }
 
-    public void waterCutoff(double cutoff) {
+    /**
+     * Cut everything below cutoff, then move everything down by cutoff.
+     *
+     * @param cutoff Threshold below which everything is treated as sea. Should be non-negative. This is not checked.
+     *
+     * The new values of the map are guaranteed to be in the range [0, 1-cutoff].
+     */
 
-        // Cut everything below cutoff, then move everything down by cutoff
+    public void waterCutoff(double cutoff) {
 
         for (int y = 0; y < this.getHeight(); y++) {
             for (int x = 0; x < this.getWidth(); x++) {
@@ -75,6 +114,15 @@ public class Map {
             }
         }
     }
+
+    /**
+     * Simulate erosion
+     *
+     * @param drops Number of drops to simulate.
+     * @param iterations How many iterations to calculate the behavior of the drop for.
+     *
+     * Each drop is simulated sequentially. It is possible for a drop to last less than the specified number of iterations: a drop is killed if it can no longer flow downwards. Therefore it is not safe to assume that doErosion terminates in a time that is a function of drops and iterations. It's guaranteed the values of the map after a call to doErosion are within the range of the values that the map had before.
+     */
 
     public void doErosion(int drops, int iterations) {
 
@@ -134,6 +182,9 @@ public class Map {
         }
     }
 
+    /**
+     * @return a BufferedImage height map corresponding to this Map. Darker colors are lower and lighter higher.
+     */
     public BufferedImage toBufferedImage() {
 
         // TODO: Make this output 16 bit greyscale png. The original data is 64 bit float.
@@ -151,6 +202,11 @@ public class Map {
         return result;
     }
 
+    /**
+     * @return A String containing a standard Wavefront OBJ 3D model of the map.
+     *
+     * This respects the Y-up convention. The X axis is guaranteed to be in the range [0, 1], the Y axis in the range [0, 0.2] and the Z axis in the range [0, height/width]. The mesh is guaranteed to only contain triangular (and therefore flat) faces.
+     */
     public String toWavefrontOBJ(){
         StringBuilder result = new StringBuilder();
         double w = this.getWidth();
