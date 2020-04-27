@@ -1,8 +1,9 @@
 ![arkkitehtuuri](arkkitehtuuri.svg)
+
 ![sekvenssikaavio](sekvenssikaavio.svg)
 <!--
 
-[Application]<-[Ui||start(window: Stage); static run()]1--[Map||index(x: int, y: int): double; getWidth(): int; getHeight(): int; makePerlin(scale: double, influence: double, offset: double); waterCutoff(cutoff: double); doErosion(drops: int, iterations: int); toBufferedImage(): BufferedImage]
+[Application]<-[Ui||start(window: Stage); static run()]1--[Map||index(x: int, y: int): double; getWidth(): int; getHeight(): int; makePerlin(scale: double, influence: double, offset: double); waterCutoff(cutoff: double); doErosion(drops: int, iterations: int); toBufferedImage(): BufferedImage; toWavefrontOBJ(): String]
 
 [Task]<-[MapTask||call(): Map]1--[Map]
 [Ui]1--[MapTask]
