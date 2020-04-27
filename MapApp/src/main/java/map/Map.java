@@ -210,14 +210,14 @@ public class Map {
      *
      * This respects the Y-up convention. The X axis is guaranteed to be in the range [0, 1], the Y axis in the range [0, 0.2] and the Z axis in the range [0, height/width]. The mesh is guaranteed to only contain triangular (and therefore flat) faces.
      */
-    public String toWavefrontOBJ(){
+    public String toWavefrontOBJ() {
         StringBuilder result = new StringBuilder();
         double w = this.getWidth();
 
         // Define vertices (Y up)
 
-        for(int i = 0; i < data.length; i++){
-            result.append("v " + ((i % this.getWidth())/w) + " " + (data[i] * 0.20) + " " + ((i / this.getWidth())/w) + "\n");
+        for (int i = 0; i < data.length; i++) {
+            result.append("v " + ((i % this.getWidth()) / w) + " " + (data[i] * 0.20) + " " + ((i / this.getWidth()) / w) + "\n");
         }
 
         // Enable smoothing
@@ -226,10 +226,10 @@ public class Map {
 
         // Define faces (triangular for better support)
         
-        for(int x = 0; x < this.getWidth()-1; x++){
-            for(int y = 0; y < this.getHeight()-1; y++){
-                result.append("f " + (y*this.getWidth() + x + 1) + " " + ((y+1)*this.getWidth() + x + 1) + " " + (y*this.getWidth() + x + 2) + "\n");
-                result.append("f " + ((y+1)*this.getWidth() + x + 1) + " " + ((y+1)*this.getWidth() + x + 2) + " " + (y*this.getWidth() + x + 2) + "\n");
+        for (int x = 0; x < this.getWidth() - 1; x++) {
+            for (int y = 0; y < this.getHeight() - 1; y++) {
+                result.append("f " + (y * this.getWidth() + x + 1) + " " + ((y + 1) * this.getWidth() + x + 1) + " " + (y * this.getWidth() + x + 2) + "\n");
+                result.append("f " + ((y + 1) * this.getWidth() + x + 1) + " " + ((y + 1) * this.getWidth() + x + 2) + " " + (y * this.getWidth() + x + 2) + "\n");
             }
         }
 
