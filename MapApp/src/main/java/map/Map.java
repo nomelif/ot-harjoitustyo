@@ -4,6 +4,9 @@ import com.flowpowered.noise.module.source.Perlin;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * Class for the representation and computation of Maps.
+ */
 public class Map {
     private double[] data;
     private final int width;

@@ -48,6 +48,13 @@ import com.google.gson.Gson;
 import map.*;
 import file.*;
 
+/**
+ * Main UI class for MapApp
+ *
+ * <p>
+ *
+ * The intended way to use this is to first create an instance via the constructor and then call run().
+ */
 public class Ui extends Application {
 
     private TextField seed;
@@ -75,6 +82,9 @@ public class Ui extends Application {
 
     private MapAppFile file;
 
+    /**
+     * Inherited from javafx.application.Application
+     */
     @Override
     public void start(Stage window) {
 
@@ -341,6 +351,9 @@ public class Ui extends Application {
         });
     }
 
+    /**
+     * Launch the UI.
+     */
     public static void run() {
         launch(Ui.class);
     }
