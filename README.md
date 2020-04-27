@@ -35,6 +35,8 @@ Yleisesti .obj-tiedostoja voi tarkastella [esimerkiksi tällä nettikilkkeellä]
 
 # Komentoriviltä suoritettavat toimenpiteet
 
+## Testit
+
 (Kaikissa alla olevissa oletetaan, että ollaan kansiossa `MapApp`)
 
 Omalla koneellani testeihin kuluu kymmenisen sekuntia ja etäpalvelimella viitisentoista.
@@ -43,11 +45,15 @@ Omalla koneellani testeihin kuluu kymmenisen sekuntia ja etäpalvelimella viitis
 mvn test
 ```
 
+## Jacoco
+
 Jacoco suorittuu komennolla:
 
 ```
 mvn test jacoco:report
 ```
+
+## Javadoc
 
 Javadoc päivittyy komennolla:
 
@@ -58,10 +64,18 @@ mvn javadoc:javadoc
 Jostain syystä javadoc ei älyä päivittyä peilaamaan koodin muutoksia, ellei vanhaa tuotosta ensin poista:
 
 ```
-rm target/site/apidocs/ -rf
+mvn clean install
 ```
 
-Suoritettavan `.jar-` tiedoston saa aikaan komennolla:
+Laitoksen koneilla näytti vieläpä siltä, että `JAVA_HOME` ympäristömuuttuja piti määritellä erikseen javadocin toimivuuden auttamiseksi. Silloin javadocin generointiin tarvittava komento olisi:
+
+```
+mvn clean install && JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/ mvn javadoc:javadoc
+```
+
+## Suoritettavan `.jar`-tiedoston tuottaminen ja ajaminen
+
+Suoritettavan `.jar`-tiedoston saa aikaan komennolla:
 
 ```
 mvn package
