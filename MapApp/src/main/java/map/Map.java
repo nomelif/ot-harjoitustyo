@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class Map {
     private double[] data;
-    private int width;
-    private int seed;
+    private final int width;
+    private final int seed;
     private Random r;
     private Perlin p;
 
