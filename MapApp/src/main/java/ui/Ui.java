@@ -286,6 +286,7 @@ public class Ui extends Application {
     private void hookSave() {
 
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Map files", "*.map"));
 
         saveItem.setOnAction(actionEvent -> {
             File fileName = fileChooser.showSaveDialog(window);
@@ -304,6 +305,7 @@ public class Ui extends Application {
     private void hookOpen() {
 
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Map files", "*.map"));
 
         openItem.setOnAction(actionEvent -> {
             File fileName = fileChooser.showOpenDialog(window);
@@ -322,6 +324,7 @@ public class Ui extends Application {
     private void hookExport() {
 
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG images", "*.png"));
 
         exportItem.setOnAction(actionEvent -> {
             File file = fileChooser.showSaveDialog(window);
@@ -338,6 +341,7 @@ public class Ui extends Application {
     private void hookExportOBJ() {
 
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("OBJ files", "*.obj"));
 
         exportOBJItem.setOnAction(actionEvent -> {
             File fileName = fileChooser.showSaveDialog(window);
