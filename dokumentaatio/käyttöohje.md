@@ -73,3 +73,5 @@ MapAppissä on perumis- ja toistamistoiminnot pitkälti siten kuin odottaa saatt
 ![kuvakaappaus 9](kuvakaappaukset/9.png)
 
 `Open map` ja `Save map` -asetukset antavat luoda ja ladata työtiedostoja. `Export map (.PNG)`-asetus tallentaa oikealla näkyvän korkeuskartan ja `Export map (.OBJ)` tallentaa karttaa vastaavan 3D-mallin `.OBJ`-tiedostona. MapApp ei pakota päätettä tiedostoa tallentaessa.
+
+OBJ-tiedosto on sellainen, ettei sitä saa laitoksen koneilla esikatseltua suoraan. [Esimerkiksi tällä nettikilkkeellä](http://masc.cs.gmu.edu/wiki/ObjViewer) se kuitenkin onnistuu helposti.
