@@ -22,6 +22,8 @@ Sovelluksen tarkoitus on tuottaa karttoja (tai ainakin karttapohjia) roolipelika
 
 Näitä olisi tarkoitus toteuttaa jo kurssin aikana sen mukaan, mihin riittää aikaa ja motivaatiota:
 
+* Yhteensopivuus OBJ-standardin kanssa. PNG-korkeuskartat ovat yllättävän operaatio värisyvyyssyistä. Karttaeditorista saa tuotettua suoraan 3D-malleja. [tehty]
+
 * Yhteensopivuus [The Battle for Wesnoth](https://wesnoth.org/)-pelin karttaeditorin kanssa. Generoidusta kartasta voisi laskea Wesnoth-karttatiedoston, jonka peli osaa piirtää pikseligrafiikkana. Itse karttaformaatti on sen verran yksinkertaisen oloinen, että tämä lienee helppo toteuttaa. Wesnothin komentoriviohjelma pystyy muuntamaan karttatiedostoja PNG-kuviksi, joten tämä voisi olla napin painalluksella tapahtuvaa. Vaikein lienee muuntaa simulaation rasteri kuusikulmiolaatoiksi mielekkäällä tavalla.
     * Mikäli tämä tapahtuu, niin lienee helppoa muuntaa karttoja muihin kuusikulmiolaatoitukseen perustuviin käyttöihin, kuten esimerkiksi [Hyground](https://www.hygroundtiles.com/) -3D-laatoitukseksi.
 
