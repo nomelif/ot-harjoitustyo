@@ -92,9 +92,9 @@ public class Map {
 
         for (int y = 0; y < this.getHeight(); y++) {
             for (int x = 0; x < this.getWidth(); x++) {
-                if(max - min != 0){
+                if (max - min != 0) {
                     this.data[y * this.getWidth() + x] += offset + influence * (newMap[y * this.getWidth() + x] - min) / (max - min);
-                }else{
+                } else {
                     this.data[y * this.getWidth() + x] += offset + influence * 0.5;
                 }
             }
