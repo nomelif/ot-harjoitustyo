@@ -206,4 +206,94 @@ public class MapTest {
             }
         }
     }
+
+    // Test that toWavefrontOBJ has the right number of vertices
+    
+    @Test
+    public void testWavefrontVertexCount(){
+        for(int w = 1; w < 10; w++){
+            for(int h = 1; h < 10; h++){
+                Map m = new Map(w, h, 1337);
+                m.makePerlin(1, 1, 0);
+                String[] wavefront_lines = m.toWavefrontOBJ().split("\n");
+                int vertcount = 0;
+                for(int i = 0; i < wavefront_lines.length; i++){
+                    if(wavefront_lines[i].startsWith("v")) vertcount++;
+                }
+                assertEquals(vertcount, w*h);
+            }
+        }
+    }
+
+    // Test that toWavefrontOBJ doesn't produce NaN
+    
+    @Test
+    public void testWavefrontNoNaNs(){
+        for(int w = 1; w < 10; w++){
+            for(int h = 1; h < 10; h++){
+                Map m = new Map(w, h, 1337);
+                m.makePerlin(1, 1, 0);
+                assertTrue("Contains nan value: m = Map(" + w + ", " + h + ", 1337); m.makePerlin(1, 1, 0);\nm.index(0, 0) = "+m.index(0, 0)+";\n" + m.toWavefrontOBJ(), !m.toWavefrontOBJ().toLowerCase().contains("nan"));
+            }
+        }
+    }
+
+    // Test that toWavefrontOBJ has the right number of faces
+    
+    @Test
+    public void testWavefrontFaceCount(){
+        for(int w = 1; w < 10; w++){
+            for(int h = 1; h < 10; h++){
+                Map m = new Map(w, h, 1337);
+                m.makePerlin(1, 1, 0);
+                String[] wavefront_lines = m.toWavefrontOBJ().split("\n");
+                int facecount = 0;
+                for(int i = 0; i < wavefront_lines.length; i++){
+                    if(wavefront_lines[i].startsWith("f")) facecount++;
+                }
+                assertEquals(facecount, 2*(w-1)*(h-1));
+            }
+        }
+    }
+
+    // Test that toWavefrontOBJ has only triangular faces
+    
+    @Test
+    public void testWavefrontFaceTris(){
+        for(int w = 1; w < 10; w++){
+            for(int h = 1; h < 10; h++){
+                Map m = new Map(w, h, 1337);
+                m.makePerlin(1, 1, 0);
+                String[] wavefront_lines = m.toWavefrontOBJ().split("\n");
+                for(int i = 0; i < wavefront_lines.length; i++){
+                    if(wavefront_lines[i].startsWith("f")){
+                        assertEquals(4, wavefront_lines[i].split(" ").length);
+                    }
+                }
+            }
+        }
+    }
+
+    // Test that toWavefrontOBJ vertices are in range
+
+    @Test
+    public void testWavefrontVertsInRange(){
+        for(int w = 1; w < 10; w++){
+            for(int h = 1; h < 10; h++){
+                Map m = new Map(w, h, 1337);
+                m.makePerlin(1, 1, 0);
+                String[] wavefront_lines = m.toWavefrontOBJ().split("\n");
+                for(int i = 0; i < wavefront_lines.length; i++){
+                    if(wavefront_lines[i].startsWith("v")){
+                        double x = Double.valueOf(wavefront_lines[i].split(" ")[1]);
+                        double y = Double.valueOf(wavefront_lines[i].split(" ")[2]);
+                        double z = Double.valueOf(wavefront_lines[i].split(" ")[3]);
+                        assertTrue("Expected x in range [0, 1] x: " + x, x >= 0 && x <= 1);
+                        assertTrue("Expected y in range [0, 0.2] y: " + y + " " + wavefront_lines[i].split(" ")[2], y >= 0 && y <= 0.2);
+                        assertTrue("Expected z in range [0, height/width] z: " + z + " height: " + h + " width: " + w, z >= 0 && z <= ((double) h / w));
+                    }
+                }
+            }
+        }
+    }
 }
