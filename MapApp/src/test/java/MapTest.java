@@ -188,4 +188,22 @@ public class MapTest {
             }
         }
     }
+
+
+    // Test that makePerlin doesn't produce NaN
+    
+    @Test
+    public void testMakePerlinNoNaNs(){
+        for(int w = 1; w < 10; w++){
+            for(int h = 1; h < 10; h++){
+                Map m = new Map(w, h, 1337);
+                m.makePerlin(1, 1, 0);
+                for(int x = 0; x < w; x++){
+                    for(int y = 0; y < h; y++){
+                        assertTrue("NaN in make perlin result: m = new Map(" + w + ", " + h + ", 1337); m.makePerlin(1, 1, 0); m.index(" + x + ", " + y + ");", !Double.isNaN(m.index(x, y)));
+                    }
+                }
+            }
+        }
+    }
 }

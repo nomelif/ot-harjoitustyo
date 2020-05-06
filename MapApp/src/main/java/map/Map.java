@@ -88,10 +88,15 @@ public class Map {
         }
 
         // Regularization step (clamp to the range [offset, influence + offset])
+        // If max = min, set all heights to offset + influence * 0.5. Otherwise NaNs can happen, trivially when width = height = 1
 
         for (int y = 0; y < this.getHeight(); y++) {
             for (int x = 0; x < this.getWidth(); x++) {
-                this.data[y * this.getWidth() + x] += offset + influence * (newMap[y * this.getWidth() + x] - min) / (max - min);
+                if(max - min != 0){
+                    this.data[y * this.getWidth() + x] += offset + influence * (newMap[y * this.getWidth() + x] - min) / (max - min);
+                }else{
+                    this.data[y * this.getWidth() + x] += offset + influence * 0.5;
+                }
             }
         }
 
@@ -208,7 +213,7 @@ public class Map {
     /**
      * @return A String containing a standard Wavefront OBJ 3D model of the map.
      *
-     * This respects the Y-up convention. The X axis is guaranteed to be in the range [0, 1], the Y axis in the range [0, 0.2] and the Z axis in the range [0, height/width]. The mesh is guaranteed to only contain triangular (and therefore flat) faces.
+     * This respects the Y-up convention. The X axis is guaranteed to be in the range [0, 1], the Y axis in the range [0, 0.2] and the Z axis in the range [0, height/width]. The mesh is guaranteed to only contain triangular (and therefore flat) faces. Calling toWavefrontOBJ with a map with width <= 1 or height <= 1 is undefined.
      */
     public String toWavefrontOBJ() {
         StringBuilder result = new StringBuilder();
