@@ -1,5 +1,7 @@
 package ui;
 
+import java.io.FileOutputStream;
+
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.util.stream.Collectors;
@@ -330,7 +332,9 @@ public class Ui extends Application {
             File file = fileChooser.showSaveDialog(window);
             if (file != null) {
                 try {
-                    ImageIO.write(map.toBufferedImage(), "png", file);
+                    FileOutputStream stream = new FileOutputStream(file);
+                    ImageIO.write(map.toBufferedImage(), "png", stream);
+                    stream.close();
                 } catch (IOException e) {
                     new Alert(Alert.AlertType.ERROR, "Kuvan tallentaminen epäonnistui", null).show();
                 }
