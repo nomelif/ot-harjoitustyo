@@ -13,6 +13,8 @@ public class Map {
     private final int seed;
     private Random r;
     private Perlin p;
+    private final int[] orientationX = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
+    private final int[] orientationY = new int[]{-1, -1, -1, 0, 0, 1, 1, 1};
 
     /**
      * @param width Width of the map in pixels. Also used as the width of the simulation grid in cells. Must be one or greater. This is not checked.
@@ -123,6 +125,28 @@ public class Map {
         }
     }
 
+    private double computeDelta(int x, int y, int newX, int newY) {
+        return (data[(newY) * this.getWidth() + newX] - data[y * this.getWidth() + x]) / Math.sqrt((x - newX) * (x - newX) +  (y - newY) * (y - newY));
+    }
+
+    private int bestIndex(int x, int y) {
+        int bestI = -1;
+        double bestDelta = 1;
+        for (int i = 0; i < 8; i++) {
+            int newX = orientationX[i] + x;
+            int newY = orientationY[i] + y;
+            if (newX < 0 || newX > this.getWidth() - 1 || newY < 0 || newY > this.getHeight() - 1) {
+                continue;
+            }
+            double delta = computeDelta(x, y, newX, newY);
+            if (bestDelta > delta) {
+                bestDelta = delta;
+                bestI = i;
+            }
+        }
+        return bestI;
+    }
+
     /**
      * Simulate erosion
      *
@@ -144,37 +168,11 @@ public class Map {
             int y = r.nextInt(this.getHeight());
             for (int i = 0; i < iterations; i++) {
 
-                // The ideal point for the drop to continue to is (bestDx, bestDy)
-                // (= the point where the local gradient leads)
-
-                int bestDx = -1;
-                int bestDy = -1;
-                double bestDelta = 1; // Measure of local gradient
-                for (int dx = -1; dx <= 1; dx++) {
-                    for (int dy = -1; dy <= 1; dy++) {
-                        if (dx == 0 && dy == 0) { // Discount (x, y)
-                            continue;
-                        }
-
-                        // Discount locations that are off the map
-
-                        if (x + dx < 0 || x + dx > this.getWidth() - 1 || y + dy < 0 || y + dy > this.getHeight() - 1) {
-                            continue;
-                        }
-
-                        // Compute the gradient (compensate for diagonal points being further away)
-
-                        double delta = (data[(y + dy) * this.getWidth() + x + dx] - data[y * this.getWidth() + x]) / Math.sqrt(dx * dx + dy * dy);
-
-                        // Update info on the optimal path
-
-                        if (bestDelta > delta) {
-                            bestDelta = delta;
-                            bestDx = dx;
-                            bestDy = dy;
-                        }
-                    }
+                int bestI = bestIndex(x, y);
+                if (bestI == -1) {
+                    break;
                 }
+                double bestDelta = computeDelta(x, y, orientationX[bestI] + x, orientationY[bestI] + y);
 
                 if (bestDelta > 0) { // If there is no way down, the drop dies
                     break;
@@ -183,8 +181,8 @@ public class Map {
                 // bestDelta / 50 was found to be a good value experimentally
 
                 data[y * this.getWidth() + x] += bestDelta / 50;
-                y += bestDy;
-                x += bestDx;
+                y += orientationY[bestI];
+                x += orientationX[bestI];
                 data[y * this.getWidth() + x] -= bestDelta / 50;
             }
         }
