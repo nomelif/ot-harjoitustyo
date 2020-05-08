@@ -15,5 +15,8 @@
 | 19.4 | 12:40-16:20 | Virittelin käyttöliittymän käyttämään sisäisesti tiedostomalliani. Hakkasin päätä lisää seinään sliderien suhteen ja päädyin tökeröön mutta toimivaan ratkaisuun. Samaa jatkui tekstikentän puljauksen kanssa. Lopulta sain kuitenkin aikaan suhteellisen järkeistetyn tavan havaita muutokset arvoihin ja tehdä niistä perumishistoria. Toteutin sitten perumisen käyttöliittymän puolelta ja yhdistin senkin tiedostomalliin. Toteutin sitten tallentamisen: päädyin työtiedostojen JSON-serialisointiin koska sen avulla debugaus helpottuu merkittävästi suhteessa binääriserialisointiin. Tulevaisuudessa voisi miettiä jotain versiointiskeemaa. Järkeistin myös hieman käyttöliittymää lisäämällä yläpalkin tallentamiselle ja eksporttaamiselle. Nyt on perusversio kasassa ja tekemättä on testejä, dokumentaatiota ja pikkusälää. |
 | 26.4 | 12:00-19:05 | Toteutin viikon uuden ominaisuuden: nyt MapApp pystyy suoraan tuottamaan 3D-mallin kartasta. Räpelsin muutaman testin, päivitin hieman dokumentaatiota ja lisäsin virheen hallintaa tiedostojen kanssa puljaamiseen. |
 | 27.4 | 10:30-17:30 | Tein Javadocin kaikesta olemassa olevasta. Tein jonkinverran koodinkaunistelua, checkstylensin koodini. Virittelin ohjelman tarjoamaan oikeita tiedostomuotoja siellä missä mahdollista. Toteutin dokumentaatioon käyttöohjeet ja arkkitehtuuridiagrammin. Päivitin tavoitedokumenttia ja vetäisin README.md-tiedoston uuteen uskoon. |
+| 6.5 | 12:00-18:20 | Tein testejä ja korjailin koodinlaatujuttuja. |
+| 7.5 | 18:20-20:05 | Checkstyleäminen jatkui ja sain vihdoin selville, miksi sovellus tuotti tietyssä tilanteessa kummallisen virheviestin. |
+| 8.5 | 11:40-17:30 | Dokumentaatiotyötä ja releasen valmistelua. Kovin vähän syntyi committeja, mutta käytin paljon aikaa sovelluksen testaamiseen. |
 
-Yhteensä: 56h 33min
+Yhteensä: 70h 28min
