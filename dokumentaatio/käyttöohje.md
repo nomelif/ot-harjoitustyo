@@ -26,13 +26,13 @@ Kun sovellus käynnistetään niin näkyvä tulos on:
 
 ![kuvakaappaus 1](kuvakaappaukset/1.png)
 
-Ikkunan vasemmalla puolella on joukko asetuksia, joilla karttaa saa muokattua. Asetuksia vastaavan kartan saa näkymään oikealle painamalla `Update map`-painiketta. Tässä voi kestää hetki. Laskennan etenemisestä näkyy tietoa ohjelman alalaidassa. Yllä näkyvillä asetuksilla saadaan tällainen kartta:
+Ikkunan vasemmalla puolella on joukko asetuksia, joilla karttaa saa muokattua. Asetuksia vastaavan korkeuskartan saa näkymään oikealle painamalla `Update map`-painiketta. Tässä voi kestää hetki. Laskennan etenemisestä näkyy tietoa ohjelman alalaidassa. Yllä näkyvillä asetuksilla saadaan tällainen kartta:
 
 ![kuvakaappaus 2](kuvakaappaukset/2.png)
 
 ### Siemenarvo
 
-Säätämällä `Random seed`-asetusta voidaan vaihtaa kartan maastomuotoja vaihtamatta merenpinnan tason tai vuorien korkeuden kaltaisia yleisiä ominaisuuksia.
+Säätämällä `Random seed`-asetusta voidaan vaihtaa korkeuskartan maastomuotoja vaihtamatta merenpinnan tason tai vuorien korkeuden kaltaisia yleisiä ominaisuuksia.
 
 Vaihtamalla siemenarvoksi `kissa123` saatiin seuraava kartta.
 
