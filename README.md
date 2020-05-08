@@ -24,6 +24,10 @@ Sovellus pyrkii olemaan karttageneraattori roolipelikampanjoita varten. Se tuott
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
 
+# Testausdokumentti
+
+[Testausdokumentti](dokumentaatio/testausdokumentti.md)
+
 # Ohjelman tuotokset
 
 [Tällä tiedostolla](dokumentaatio/demot/Viekas%20kettu.map) ohjelma tuottaa seuraavan kuvan ja .obj -tiedon:
