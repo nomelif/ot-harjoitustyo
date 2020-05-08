@@ -12,6 +12,8 @@ Sovellus pyrkii olemaan karttageneraattori roolipelikampanjoita varten. Se tuott
 
 [Viikko 6](https://github.com/nomelif/ot-harjoitustyo/releases/tag/viikko6)
 
+[Loppupalautus](https://github.com/nomelif/ot-harjoitustyo/releases/tag/loppupalautus)
+
 # Arkkitehtuuridiagrammi
 
 [Arkkitehtuuridokumentti](dokumentaatio/arkkitehtuuri.md)
